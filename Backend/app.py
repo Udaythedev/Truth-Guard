@@ -5,11 +5,16 @@ from flask_cors import CORS
 import sqlite3
 import os
 from dotenv import load_dotenv
-import os
-print("OPENAI KEY (Render):", os.getenv("OPENAI_API_KEY")[:15])
 
 # Load environment variables
 load_dotenv()
+
+# Debug OPENAI KEY only if it exists
+api_key = os.getenv("OPENAI_API_KEY")
+if api_key:
+    print("OPENAI KEY (Render):", api_key[:15])
+else:
+    print("OPENAI KEY not set")
 
 # --------- Helper: Compute Confidence Score ---------
 def _compute_confidence(status: str, news_sources: list, fact_checks: list) -> int:
@@ -106,6 +111,15 @@ def categories():
     conn.close()
     category_list = ["All"] + [c["category"] for c in cats]
     return jsonify(category_list)
+
+@app.route("/api/random")
+def random_news():
+    conn = get_db_connection()
+    news = conn.execute("SELECT * FROM news ORDER BY RANDOM() LIMIT 1").fetchone()
+    conn.close()
+    if news:
+        return jsonify(dict(news))
+    return jsonify({"error": "No news available"}), 404
 
 @app.route("/api/verify", methods=["POST"])
 def verify_claim_route():
