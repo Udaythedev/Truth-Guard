@@ -116,6 +116,8 @@ The frontend runs on `http://localhost:3000/` and fetches data from the backend 
 * `GET /api/trending` – Returns all trending news articles.
 * `GET /api/categories` – Returns all available news categories.
 * `GET /api/random` – Returns a random news article from the database.
+  - **Success Response (200):** Returns a single news article object with `id`, `title`, `category`, `source`, and `summary` fields.
+  - **Error Response (404):** Returns `{"error": "No news available"}` if the database is empty.
 
 ---
 
