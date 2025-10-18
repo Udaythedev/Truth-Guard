@@ -7,6 +7,7 @@ Truth-Guard is a web application that provides real-time trending news and fact-
 ## Features
 
 - **Trending News:** Displays the latest trending articles from the database.
+- **Random Article:** Pick a random news article with a single click to discover new content.
 - **Category Filters:** Filter news by categories such as Politics, Health, Tech, and Entertainment.
 - **Statistics Widgets:** Shows key metrics like total trending news, verified claims, and category-wise counts.
 - **Responsive Design:** Works on both desktop and mobile screens.
@@ -114,6 +115,7 @@ The frontend runs on `http://localhost:3000/` and fetches data from the backend 
 
 * `GET /api/trending` – Returns all trending news articles.
 * `GET /api/categories` – Returns all available news categories.
+* `GET /api/random` – Returns a random news article from the database.
 
 ---
 
